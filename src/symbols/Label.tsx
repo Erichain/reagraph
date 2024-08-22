@@ -77,6 +77,7 @@ export const Label: FC<LabelProps> = ({
         color={normalizedColor}
         fillOpacity={opacity}
         textAlign="center"
+        characters={text}
         outlineWidth={stroke ? 1 : 0}
         outlineColor={normalizedStroke}
         depthOffset={0}
