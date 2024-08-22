@@ -32,6 +32,8 @@ export interface NodeProps {
    */
   id: string;
 
+  collapseOnDoubleClick?: boolean;
+
   /**
    * The parent nodes of the node.
    */
@@ -97,7 +99,8 @@ export interface NodeProps {
    */
   onDoubleClick?: (
     node: InternalGraphNode,
-    event: ThreeEvent<MouseEvent>
+    props?: CollapseProps,
+    event?: ThreeEvent<MouseEvent>
   ) => void;
 
   /**
@@ -127,7 +130,8 @@ export const Node: FC<NodeProps> = ({
   onDragged,
   onPointerOut,
   onContextMenu,
-  renderNode
+  renderNode,
+  collapseOnDoubleClick
 }) => {
   const cameraControls = useCameraControls();
   const theme = useStore(state => state.theme);
@@ -177,6 +181,7 @@ export const Node: FC<NodeProps> = ({
       if (isCollapsed) {
         setCollapsedNodeIds(collapsedNodeIds.filter(p => p !== id));
       } else {
+        console.log(collapsedNodeIds, id);
         setCollapsedNodeIds([...collapsedNodeIds, id]);
       }
     }
@@ -192,10 +197,10 @@ export const Node: FC<NodeProps> = ({
       to: {
         nodePosition: position
           ? [
-            position.x,
-            position.y,
-            shouldHighlight ? position.z + 1 : position.z
-          ]
+              position.x,
+              position.y,
+              shouldHighlight ? position.z + 1 : position.z
+            ]
           : [0, 0, 0],
         labelPosition: [0, -(nodeSize + 7), 2],
         subLabelPosition: [0, -(nodeSize + 14), 2]
@@ -403,7 +408,18 @@ export const Node: FC<NodeProps> = ({
       }}
       onDoubleClick={(event: ThreeEvent<MouseEvent>) => {
         if (!disabled && !isDragging) {
-          onDoubleClick?.(node, event);
+          onDoubleClick?.(
+            node,
+            {
+              canCollapse,
+              isCollapsed
+            },
+            event
+          );
+
+          if (collapseOnDoubleClick) {
+            onCollapse();
+          }
         }
       }}
       onContextMenu={() => {
