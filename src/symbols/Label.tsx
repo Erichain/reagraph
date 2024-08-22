@@ -69,6 +69,14 @@ export const Label: FC<LabelProps> = ({
     [stroke]
   );
 
+  const renderText = () => {
+    if (text.length > 10) {
+      return `${text.slice(0, 10)}...`;
+    }
+
+    return text;
+  };
+
   return (
     <Billboard position={[0, 0, 1]}>
       <Text
@@ -77,15 +85,17 @@ export const Label: FC<LabelProps> = ({
         color={normalizedColor}
         fillOpacity={opacity}
         textAlign="center"
+        strokeWidth={2}
+        strokeColor="#fff"
         characters={text}
-        outlineWidth={stroke ? 1 : 0}
+        outlineWidth={stroke ? 1 : 2}
         outlineColor={normalizedStroke}
         depthOffset={0}
         maxWidth={100}
         overflowWrap="break-word"
         rotation={rotation}
       >
-        {shortText}
+        {renderText()}
       </Text>
     </Billboard>
   );
