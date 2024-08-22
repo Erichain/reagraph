@@ -326,15 +326,14 @@ export const useSelection = ({
   }, []);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('keydown', onKeyDown);
-    }
-
-    return () => {
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('keydown', onKeyDown);
-      }
-    };
+    // if (typeof window !== 'undefined') {
+    //   window.addEventListener('keydown', onKeyDown);
+    // }
+    // return () => {
+    //   if (typeof window !== 'undefined') {
+    //     window.removeEventListener('keydown', onKeyDown);
+    //   }
+    // };
   }, [onKeyDown]);
 
   const onCanvasClick = useCallback(

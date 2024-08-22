@@ -219,29 +219,26 @@ export const CameraControls: FC<
     );
 
     useEffect(() => {
-      if (!disabled) {
-        leftKey.addEventListener('holding', panLeft);
-        rightKey.addEventListener('holding', panRight);
-        upKey.addEventListener('holding', panUp);
-        downKey.addEventListener('holding', panDown);
-
-        if (typeof window !== 'undefined') {
-          window.addEventListener('keydown', onKeyDown);
-          window.addEventListener('keyup', onKeyUp);
-        }
-      }
-
-      return () => {
-        leftKey.removeEventListener('holding', panLeft);
-        rightKey.removeEventListener('holding', panRight);
-        upKey.removeEventListener('holding', panUp);
-        downKey.removeEventListener('holding', panDown);
-
-        if (typeof window !== 'undefined') {
-          window.removeEventListener('keydown', onKeyDown);
-          window.removeEventListener('keyup', onKeyUp);
-        }
-      };
+      // if (!disabled) {
+      //   leftKey.addEventListener('holding', panLeft);
+      //   rightKey.addEventListener('holding', panRight);
+      //   upKey.addEventListener('holding', panUp);
+      //   downKey.addEventListener('holding', panDown);
+      //   if (typeof window !== 'undefined') {
+      //     window.addEventListener('keydown', onKeyDown);
+      //     window.addEventListener('keyup', onKeyUp);
+      //   }
+      // }
+      // return () => {
+      //   leftKey.removeEventListener('holding', panLeft);
+      //   rightKey.removeEventListener('holding', panRight);
+      //   upKey.removeEventListener('holding', panUp);
+      //   downKey.removeEventListener('holding', panDown);
+      //   if (typeof window !== 'undefined') {
+      //     window.removeEventListener('keydown', onKeyDown);
+      //     window.removeEventListener('keyup', onKeyUp);
+      //   }
+      // };
     }, [disabled, onKeyDown, onKeyUp, panDown, panLeft, panRight, panUp]);
 
     useEffect(() => {
