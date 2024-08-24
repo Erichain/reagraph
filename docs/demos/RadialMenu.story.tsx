@@ -1,11 +1,14 @@
 import React from 'react';
-import { GraphCanvas, RadialMenu } from '../../src';
+import { GraphCanvas, Icon, RadialMenu } from '../../src';
 import {
+  iconNodes,
   parentEdges,
   parentNodes,
   simpleEdges,
   simpleNodes
 } from '../assets/demo';
+import demonSvg from '../assets/demon.svg';
+import computerSvg from './computer.svg';
 
 export default {
   title: 'Demos/Context Menu/Radial',
@@ -14,49 +17,52 @@ export default {
 
 export const Simple = () => (
   <GraphCanvas
-    nodes={simpleNodes}
+    nodes={simpleNodes.map(item => ({
+      ...item
+    }))}
     edges={simpleEdges}
     contextMenu={({ data, onClose }) => (
       <RadialMenu
+        node={data}
         onClose={onClose}
         items={[
           {
-            label: 'Add Node',
+            icon: <img src={demonSvg} />,
             onClick: () => {
               alert('Add a node');
               onClose();
             }
           },
           {
-            label: 'Remove Node',
+            icon: <img src={demonSvg} />,
             onClick: () => {
               alert('Remove the node');
               onClose();
             }
           },
           {
-            label: 'Remove Node',
+            icon: <img src={demonSvg} />,
             onClick: () => {
               alert('Remove the node');
               onClose();
             }
           },
           {
-            label: 'Remove Node',
+            icon: <img src={demonSvg} />,
             onClick: () => {
               alert('Remove the node');
               onClose();
             }
           },
           {
-            label: 'Remove Node',
+            icon: <img src={demonSvg} />,
             onClick: () => {
               alert('Remove the node');
               onClose();
             }
           },
           {
-            label: 'Remove Node',
+            icon: <img src={demonSvg} />,
             onClick: () => {
               alert('Remove the node');
               onClose();
@@ -77,7 +83,7 @@ export const Disabled = () => (
         onClose={onClose}
         items={[
           {
-            label: 'Add Node',
+            icon: demonSvg,
             disabled: true,
             onClick: () => {
               alert('Add a node');
@@ -85,7 +91,7 @@ export const Disabled = () => (
             }
           },
           {
-            label: 'Remove Node',
+            icon: demonSvg,
             disabled: true,
             onClick: () => {
               alert('Remove the node');

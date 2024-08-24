@@ -24,8 +24,8 @@
   }
 
   .contentContainer {
-    width: 200%;
-    height: 200%;
+    width: 160%;
+    height: 160%;
     transform-origin: 50% 50%;
     border-radius: 50%;
     outline: none;

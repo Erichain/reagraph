@@ -1,3 +1,20 @@
+.menu-wrapper {
+  position: relative;
+}
+
+.centerCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 9;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .container {
   border-radius: 50%;
   z-index: 9;
@@ -7,15 +24,16 @@
   border: solid 2px var(--radial-menu-border);
   overflow: hidden;
   background: rgb(213, 213, 213, 0.2);
-  mask-image: radial-gradient(
+
+  /* mask-image: radial-gradient(
     circle,
     transparent 50px,
     rgb(213, 213, 213) 50px
   );
   mask-size: contain;
-  pointer-events: auto;
+  pointer-events: auto; */
 
-  &:before {
+  /* &:before {
     content: ' ';
     background: transparent;
     pointer-events: none;
@@ -27,5 +45,5 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
+  } */
 }

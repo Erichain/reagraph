@@ -6,7 +6,7 @@ export interface MenuItem {
   /**
    * Label to display on the menu item.
    */
-  label: string;
+  label?: string;
 
   /**
    * CSS Classname to apply to the slice.
@@ -30,6 +30,8 @@ export interface MenuItem {
 }
 
 interface RadialSliceProps extends MenuItem {
+  contentContainerStyle?: React.CSSProperties;
+
   /**
    * The starting angle of the radial slice, in degrees.
    */
@@ -78,7 +80,8 @@ export const RadialSlice: FC<RadialSliceProps> = ({
   innerRadius,
   skew,
   disabled,
-  onClick
+  onClick,
+  contentContainerStyle
 }) => (
   <div
     role="menuitem"
@@ -103,7 +106,8 @@ export const RadialSlice: FC<RadialSliceProps> = ({
       style={{
         transform: `skew(${-skew}deg) rotate(${
           (polar ? 90 : centralAngle) / 2 - 90
-        }deg)`
+        }deg)`,
+        ...(contentContainerStyle || {})
       }}
     >
       <div

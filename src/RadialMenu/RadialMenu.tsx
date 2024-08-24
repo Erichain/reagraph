@@ -3,6 +3,7 @@ import { RadialSlice, MenuItem } from './RadialSlice';
 import { calculateRadius } from './utils';
 import css from './RadialMenu.module.css';
 import classNames from 'classnames';
+import { GraphNode } from 'types';
 
 interface RadialMenuProps {
   /**
@@ -10,18 +11,22 @@ interface RadialMenuProps {
    */
   items: MenuItem[];
 
+  containerStyle?: React.CSSProperties;
+
+  centerStyle?: React.CSSProperties;
+
+  centerIcon?: React.ReactElement;
+
+  contentContainerStyle?: React.CSSProperties;
+
+  node: GraphNode;
+
   onNodeClick?: () => void;
 
   /**
    * The function to call when the node is double clicked.
    */
   onNodeDoubleClick?: () => void;
-
-  centerWidth?: number;
-
-  centerHeight?: number;
-
-  centerFill?: string;
 
   /**
    * The radius of the radial menu.
@@ -58,7 +63,12 @@ export const RadialMenu: FC<RadialMenuProps> = ({
   startOffsetAngle,
   onClose,
   onNodeClick,
-  onNodeDoubleClick
+  onNodeDoubleClick,
+  node,
+  centerStyle,
+  containerStyle,
+  centerIcon,
+  contentContainerStyle
 }) => {
   const { centralAngle, polar, startAngle, deltaAngle } = useMemo(
     () => calculateRadius(items, startOffsetAngle),
@@ -75,20 +85,36 @@ export const RadialMenu: FC<RadialMenuProps> = ({
     return null;
   }
 
+  console.log(node);
+
   return (
     <div
       role="menu"
       className={classNames(css.container, className)}
-      onClick={onNodeClick}
-      onDoubleClick={onNodeDoubleClick}
+      style={containerStyle}
       onPointerEnter={() => {
         clearTimeout(timeout.current);
       }}
       onPointerLeave={event => {
         clearTimeout(timeout.current);
-        timeout.current = setTimeout(() => onClose?.(event), 500);
+        timeout.current = setTimeout(() => onClose?.(event), 300);
       }}
     >
+      <div
+        onClick={onNodeClick}
+        onDoubleClick={onNodeDoubleClick}
+        onPointerOver={() => {}}
+        onPointerOut={() => {}}
+        className={css.centerCircle}
+        style={{
+          width: node.size * 7,
+          height: node.size * 7,
+          background: node.fill,
+          ...(centerStyle || {})
+        }}
+      >
+        {centerIcon ? centerIcon : null}
+      </div>
       {items.map((slice, index) => (
         <RadialSlice
           key={index}
@@ -100,6 +126,7 @@ export const RadialMenu: FC<RadialMenuProps> = ({
           skew={polar ? 0 : deltaAngle}
           polar={polar}
           centralAngle={centralAngle}
+          contentContainerStyle={contentContainerStyle}
           onClick={event => {
             slice?.onClick(event);
             onClose?.(event);
