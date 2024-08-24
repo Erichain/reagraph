@@ -195,12 +195,12 @@ export const Edge: FC<EdgeProps> = ({
       // Offset the label to the mid point of the curve
       const offset = new Vector3().subVectors(newMidPoint, curve.getPoint(0.5));
       switch (labelPlacement) {
-      case 'above':
-        offset.y = offset.y - LABEL_PLACEMENT_OFFSET;
-        break;
-      case 'below':
-        offset.y = offset.y + LABEL_PLACEMENT_OFFSET;
-        break;
+        case 'above':
+          offset.y = offset.y - LABEL_PLACEMENT_OFFSET;
+          break;
+        case 'below':
+          offset.y = offset.y + LABEL_PLACEMENT_OFFSET;
+          break;
       }
       newMidPoint = newMidPoint.sub(offset);
     }
@@ -243,9 +243,9 @@ export const Edge: FC<EdgeProps> = ({
         labelPlacement === 'natural'
           ? 0
           : Math.atan(
-            (to.position.y - from.position.y) /
+              (to.position.y - from.position.y) /
                 (to.position.x - from.position.x)
-          )
+            )
       ),
     [
       to.position.x,

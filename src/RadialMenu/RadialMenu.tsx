@@ -10,6 +10,13 @@ interface RadialMenuProps {
    */
   items: MenuItem[];
 
+  onNodeClick?: () => void;
+
+  /**
+   * The function to call when the node is double clicked.
+   */
+  onNodeDoubleClick?: () => void;
+
   centerWidth?: number;
 
   centerHeight?: number;
@@ -49,7 +56,9 @@ export const RadialMenu: FC<RadialMenuProps> = ({
   className,
   innerRadius,
   startOffsetAngle,
-  onClose
+  onClose,
+  onNodeClick,
+  onNodeDoubleClick
 }) => {
   const { centralAngle, polar, startAngle, deltaAngle } = useMemo(
     () => calculateRadius(items, startOffsetAngle),
@@ -70,7 +79,11 @@ export const RadialMenu: FC<RadialMenuProps> = ({
     <div
       role="menu"
       className={classNames(css.container, className)}
-      onPointerEnter={() => clearTimeout(timeout.current)}
+      onClick={onNodeClick}
+      onDoubleClick={onNodeDoubleClick}
+      onPointerEnter={() => {
+        clearTimeout(timeout.current);
+      }}
       onPointerLeave={event => {
         clearTimeout(timeout.current);
         timeout.current = setTimeout(() => onClose?.(event), 500);

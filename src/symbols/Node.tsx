@@ -5,7 +5,7 @@ import React, {
   useCallback,
   useMemo,
   useRef,
-  useState,
+  useState
 } from 'react';
 import { Group } from 'three';
 import { animationConfig } from '../utils';
@@ -17,7 +17,7 @@ import {
   ContextMenuEvent,
   InternalGraphNode,
   NodeRenderer,
-  CollapseProps,
+  CollapseProps
 } from '../types';
 import { Html, useCursor } from 'glodrei';
 import { useCameraControls } from '../CameraControls';
@@ -135,22 +135,22 @@ export const Node: FC<NodeProps> = ({
   onContextMenu,
   renderNode,
   collapseOnDoubleClick,
-  showMenuWhenPointOver,
+  showMenuWhenPointOver
 }) => {
   const cameraControls = useCameraControls();
-  const theme = useStore((state) => state.theme);
-  const node = useStore((state) => state.nodes.find((n) => n.id === id));
-  const edges = useStore((state) => state.edges);
-  const draggingId = useStore((state) => state.draggingId);
-  const collapsedNodeIds = useStore((state) => state.collapsedNodeIds);
-  const setDraggingId = useStore((state) => state.setDraggingId);
-  const setNodePosition = useStore((state) => state.setNodePosition);
-  const setCollapsedNodeIds = useStore((state) => state.setCollapsedNodeIds);
-  const isCollapsed = useStore((state) => state.collapsedNodeIds.includes(id));
-  const isActive = useStore((state) => state.actives?.includes(id));
-  const isSelected = useStore((state) => state.selections?.includes(id));
-  const hasSelections = useStore((state) => state.selections?.length > 0);
-  const center = useStore((state) => state.centerPosition);
+  const theme = useStore(state => state.theme);
+  const node = useStore(state => state.nodes.find(n => n.id === id));
+  const edges = useStore(state => state.edges);
+  const draggingId = useStore(state => state.draggingId);
+  const collapsedNodeIds = useStore(state => state.collapsedNodeIds);
+  const setDraggingId = useStore(state => state.setDraggingId);
+  const setNodePosition = useStore(state => state.setNodePosition);
+  const setCollapsedNodeIds = useStore(state => state.setCollapsedNodeIds);
+  const isCollapsed = useStore(state => state.collapsedNodeIds.includes(id));
+  const isActive = useStore(state => state.actives?.includes(id));
+  const isSelected = useStore(state => state.selections?.includes(id));
+  const hasSelections = useStore(state => state.selections?.length > 0);
+  const center = useStore(state => state.centerPosition);
 
   const isDragging = draggingId === id;
   const {
@@ -158,7 +158,7 @@ export const Node: FC<NodeProps> = ({
     label,
     subLabel,
     size: nodeSize = 7,
-    labelVisible = true,
+    labelVisible = true
   } = node;
 
   const group = useRef<Group | null>(null);
@@ -175,7 +175,7 @@ export const Node: FC<NodeProps> = ({
 
   const canCollapse = useMemo(() => {
     // If the node has outgoing edges, it can collapse via context menu
-    const outboundLinks = edges.filter((l) => l.source === id);
+    const outboundLinks = edges.filter(l => l.source === id);
 
     return outboundLinks.length > 0 || isCollapsed;
   }, [edges, id, isCollapsed]);
@@ -183,7 +183,7 @@ export const Node: FC<NodeProps> = ({
   const onCollapse = useCallback(() => {
     if (canCollapse) {
       if (isCollapsed) {
-        setCollapsedNodeIds(collapsedNodeIds.filter((p) => p !== id));
+        setCollapsedNodeIds(collapsedNodeIds.filter(p => p !== id));
       } else {
         console.log(collapsedNodeIds, id);
         setCollapsedNodeIds([...collapsedNodeIds, id]);
@@ -196,23 +196,23 @@ export const Node: FC<NodeProps> = ({
       from: {
         nodePosition: center ? [center.x, center.y, 0] : [0, 0, 0],
         labelPosition: [0, -(nodeSize + 7), 2],
-        subLabelPosition: [0, -(nodeSize + 14), 2],
+        subLabelPosition: [0, -(nodeSize + 14), 2]
       },
       to: {
         nodePosition: position
           ? [
               position.x,
               position.y,
-              shouldHighlight ? position.z + 1 : position.z,
+              shouldHighlight ? position.z + 1 : position.z
             ]
           : [0, 0, 0],
         labelPosition: [0, -(nodeSize + 7), 2],
-        subLabelPosition: [0, -(nodeSize + 14), 2],
+        subLabelPosition: [0, -(nodeSize + 14), 2]
       },
       config: {
         ...animationConfig,
-        duration: animated && !draggingId ? undefined : 0,
-      },
+        duration: animated && !draggingId ? undefined : 0
+      }
     }),
     [isDragging, position, animated, nodeSize, shouldHighlight]
   );
@@ -221,7 +221,7 @@ export const Node: FC<NodeProps> = ({
     draggable,
     position,
     // @ts-ignore
-    set: (pos) => setNodePosition(id, pos),
+    set: pos => setNodePosition(id, pos),
     onDragStart: () => {
       setDraggingId(id);
       setActive(true);
@@ -230,7 +230,7 @@ export const Node: FC<NodeProps> = ({
       setDraggingId(null);
       setActive(false);
       onDragged?.(node);
-    },
+    }
   });
 
   useCursor(active && !draggingId && onClick !== undefined, 'pointer');
@@ -264,7 +264,7 @@ export const Node: FC<NodeProps> = ({
       if (showMenuWhenPointOver) {
         // setMenuVisible(false);
       }
-    },
+    }
   });
 
   const nodeComponent = useMemo(
@@ -278,7 +278,7 @@ export const Node: FC<NodeProps> = ({
           opacity: selectionOpacity,
           animated,
           selected: isSelected,
-          node,
+          node
         })
       ) : (
         <>
@@ -317,7 +317,7 @@ export const Node: FC<NodeProps> = ({
       selectionOpacity,
       animated,
       isSelected,
-      node,
+      node
     ]
   );
 
@@ -378,7 +378,7 @@ export const Node: FC<NodeProps> = ({
       theme.node.label.stroke,
       theme.node.subLabel?.activeColor,
       theme.node.subLabel?.color,
-      theme.node.subLabel?.stroke,
+      theme.node.subLabel?.stroke
     ]
   );
 
@@ -386,13 +386,13 @@ export const Node: FC<NodeProps> = ({
     () =>
       menuVisible &&
       contextMenu && (
-        <Html prepend={true} center={true}>
+        <Html prepend={true} center={true} zIndexRange={[1000, 5000]}>
           {contextMenu({
             data: node,
             canCollapse,
             isCollapsed,
             onCollapse,
-            onClose: () => setMenuVisible(false),
+            onClose: () => setMenuVisible(false)
           })}
         </Html>
       ),
@@ -413,7 +413,7 @@ export const Node: FC<NodeProps> = ({
             node,
             {
               canCollapse,
-              isCollapsed,
+              isCollapsed
             },
             event
           );
@@ -425,7 +425,7 @@ export const Node: FC<NodeProps> = ({
             node,
             {
               canCollapse,
-              isCollapsed,
+              isCollapsed
             },
             event
           );
@@ -441,7 +441,7 @@ export const Node: FC<NodeProps> = ({
           onContextMenu?.(node, {
             canCollapse,
             isCollapsed,
-            onCollapse,
+            onCollapse
           });
         }
       }}
@@ -455,5 +455,5 @@ export const Node: FC<NodeProps> = ({
 };
 
 Node.defaultProps = {
-  draggable: false,
+  draggable: false
 };
