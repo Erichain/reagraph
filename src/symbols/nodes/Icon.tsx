@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { FC, useMemo } from 'react';
 import { a, useSpring } from '@react-spring/three';
 import { TextureLoader, LinearFilter, DoubleSide } from 'three';
@@ -17,16 +19,16 @@ export const Icon: FC<IconProps> = ({ image, id, size, opacity, animated }) => {
   const { scale, spriteOpacity } = useSpring({
     from: {
       scale: [0.00001, 0.00001, 0.00001],
-      spriteOpacity: 0
+      spriteOpacity: 0,
     },
     to: {
       scale: [size, size, size],
-      spriteOpacity: opacity
+      spriteOpacity: opacity,
     },
     config: {
       ...animationConfig,
-      duration: animated ? undefined : 0
-    }
+      duration: animated ? undefined : 0,
+    },
   });
 
   return (
@@ -46,5 +48,5 @@ export const Icon: FC<IconProps> = ({ image, id, size, opacity, animated }) => {
 };
 
 Icon.defaultProps = {
-  opacity: 1
+  opacity: 1,
 };

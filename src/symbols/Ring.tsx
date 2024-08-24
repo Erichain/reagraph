@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { FC, useMemo } from 'react';
 import { Color, ColorRepresentation, DoubleSide } from 'three';
 import { animationConfig } from '../utils/animation';
@@ -50,23 +51,23 @@ export const Ring: FC<RingProps> = ({
   animated,
   strokeWidth,
   innerRadius = 4,
-  segments = 25
+  segments = 25,
 }) => {
   const normalizedColor = useMemo(() => new Color(color), [color]);
 
   const { ringSize, ringOpacity } = useSpring({
     from: {
       ringOpacity: 0,
-      ringSize: [0.00001, 0.00001, 0.00001]
+      ringSize: [0.00001, 0.00001, 0.00001],
     },
     to: {
       ringOpacity: opacity,
-      ringSize: [size / 2, size / 2, 1]
+      ringSize: [size / 2, size / 2, 1],
     },
     config: {
       ...animationConfig,
-      duration: animated ? undefined : 0
-    }
+      duration: animated ? undefined : 0,
+    },
   });
 
   const strokeWidthFraction = strokeWidth / 10;
@@ -97,5 +98,5 @@ Ring.defaultProps = {
   color: '#D8E6EA',
   size: 1,
   opacity: 0.5,
-  strokeWidth: 5
+  strokeWidth: 5,
 };

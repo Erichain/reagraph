@@ -39,6 +39,8 @@ export interface GraphNode extends GraphElementBaseAttributes {
    */
   parents?: string[];
 
+  showMenuWhenPointOver?: boolean;
+
   /**
    * Icon URL for the node.
    */

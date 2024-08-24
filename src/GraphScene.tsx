@@ -386,6 +386,7 @@ export const GraphScene: FC<GraphSceneProps & { ref?: Ref<GraphSceneRef> }> =
             <Node
               key={n?.id}
               id={n?.id}
+              showMenuWhenPointOver={n?.showMenuWhenPointOver}
               labelFontUrl={labelFontUrl}
               draggable={draggable}
               disabled={disabled}

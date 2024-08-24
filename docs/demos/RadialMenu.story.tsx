@@ -1,6 +1,11 @@
 import React from 'react';
 import { GraphCanvas, RadialMenu } from '../../src';
-import { parentEdges, parentNodes, simpleEdges, simpleNodes } from '../assets/demo';
+import {
+  parentEdges,
+  parentNodes,
+  simpleEdges,
+  simpleNodes
+} from '../assets/demo';
 
 export default {
   title: 'Demos/Context Menu/Radial',
@@ -19,6 +24,34 @@ export const Simple = () => (
             label: 'Add Node',
             onClick: () => {
               alert('Add a node');
+              onClose();
+            }
+          },
+          {
+            label: 'Remove Node',
+            onClick: () => {
+              alert('Remove the node');
+              onClose();
+            }
+          },
+          {
+            label: 'Remove Node',
+            onClick: () => {
+              alert('Remove the node');
+              onClose();
+            }
+          },
+          {
+            label: 'Remove Node',
+            onClick: () => {
+              alert('Remove the node');
+              onClose();
+            }
+          },
+          {
+            label: 'Remove Node',
+            onClick: () => {
+              alert('Remove the node');
               onClose();
             }
           },

@@ -10,6 +10,12 @@ interface RadialMenuProps {
    */
   items: MenuItem[];
 
+  centerWidth?: number;
+
+  centerHeight?: number;
+
+  centerFill?: string;
+
   /**
    * The radius of the radial menu.
    */
