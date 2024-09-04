@@ -104,6 +104,6 @@ export const Label: FC<LabelProps> = ({
 Label.defaultProps = {
   opacity: 1,
   fontSize: 7,
-  color: '#2A6475',
+  color: '#fff',
   ellipsis: 75
 };

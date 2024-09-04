@@ -41,6 +41,8 @@ export interface GraphNode extends GraphElementBaseAttributes {
 
   showMenuWhenPointOver?: boolean;
 
+  collapseOnDoubleClick?: boolean;
+
   /**
    * Icon URL for the node.
    */

@@ -158,8 +158,6 @@ export interface GraphSceneProps {
    */
   layoutOverrides?: LayoutOverrides;
 
-  collapseOnDoubleClick?: boolean;
-
   /**
    * When a node was clicked.
    */
@@ -330,7 +328,6 @@ export const GraphScene: FC<GraphSceneProps & { ref?: Ref<GraphSceneRef> }> =
         edgeInterpolation,
         labelFontUrl,
         renderNode,
-        collapseOnDoubleClick,
         ...rest
       },
       ref
@@ -386,6 +383,7 @@ export const GraphScene: FC<GraphSceneProps & { ref?: Ref<GraphSceneRef> }> =
             <Node
               key={n?.id}
               id={n?.id}
+              collapseOnDoubleClick={n?.collapseOnDoubleClick}
               showMenuWhenPointOver={n?.showMenuWhenPointOver}
               labelFontUrl={labelFontUrl}
               draggable={draggable}
@@ -399,7 +397,6 @@ export const GraphScene: FC<GraphSceneProps & { ref?: Ref<GraphSceneRef> }> =
               onPointerOver={onNodePointerOver}
               onPointerOut={onNodePointerOut}
               onDragged={onNodeDragged}
-              collapseOnDoubleClick={collapseOnDoubleClick}
             />
           )),
         [

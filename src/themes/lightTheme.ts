@@ -11,12 +11,12 @@ export const lightTheme: Theme = {
     selectedOpacity: 1,
     inactiveOpacity: 0.2,
     label: {
-      color: '#2A6475',
+      color: '#fff',
       stroke: '#fff',
       activeColor: '#1DE9AC'
     },
     subLabel: {
-      color: '#ddd',
+      color: '#fff',
       stroke: 'transparent',
       activeColor: '#1DE9AC'
     }
@@ -37,7 +37,7 @@ export const lightTheme: Theme = {
     inactiveOpacity: 0.1,
     label: {
       stroke: '#fff',
-      color: '#2A6475',
+      color: '#fff',
       activeColor: '#1DE9AC',
       fontSize: 6
     }
